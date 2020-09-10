@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookWorm.DAL\BookWorm.DAL.csproj" />
+    <ProjectReference Include="..\BookWorm.DTO\BookWorm.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

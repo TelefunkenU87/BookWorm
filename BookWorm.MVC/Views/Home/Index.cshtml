@@ -1,0 +1,34 @@
+﻿@model List<AuthorsDTO>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<div class="table-responsive">
+    @*<table class="table table-striped table-hover table-sm" data-toggle="table" data-pagination="true" data-search="true">*@
+    <table class="table table-striped table-hover table-sm"
+           data-toggle="table" data-search="true" data-search-align="left" data-show-columns="true"
+           data-pagination="true" data-pagination-v-align="both">
+        <thead class="thead-light">
+            <tr>
+                <th data-sortable="true">Author Id</th>
+                <th data-sortable="true">First Name</th>
+                <th data-sortable="true">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.Id</td>
+                    <td>@a.FirstName</td>
+                    <td>@a.LastName </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
