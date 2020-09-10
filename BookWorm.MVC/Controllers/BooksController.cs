@@ -23,6 +23,9 @@ namespace BookWorm.MVC.Controllers
         public IActionResult Index()
         {
             var books = _bookRepo.GetAllBooks();
+            var newBook = new BooksDTO();
+            newBook.Id = 0;
+            books.Add(newBook);
 
             return View(books);
         }
@@ -32,6 +35,39 @@ namespace BookWorm.MVC.Controllers
             var book = _bookRepo.GetBookById(id);
 
             return View(book);
+        }
+
+        public IActionResult DeleteBook(int id)
+        {
+            if (id > 0)
+            {
+                _bookRepo.DeleteBook(id);
+            }
+            else
+            {
+                return NotFound();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult EditBook(BooksDTO updatedBook)
+        {
+            if(ModelState.IsValid && updatedBook.Id > 0)
+            {
+                _bookRepo.UpdateBook(updatedBook);
+                return RedirectToAction("Details", new { id = updatedBook.Id });
+            }
+            else if(ModelState.IsValid && updatedBook.Id < 1)
+            {
+                _bookRepo.AddBook(updatedBook);
+                var newBook = _bookRepo.GetLatestBook();
+                return RedirectToAction("Details", new { id = newBook.Id });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

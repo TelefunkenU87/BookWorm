@@ -21,14 +21,36 @@ namespace BookWorm.DAL.Repositories
             _connString = _config.GetConnectionString("DefaultConnection");
         }
 
-        public int AddBook(BooksDTO addBook)
+        public BooksDTO AddBook(BooksDTO addBook)
         {
-            throw new NotImplementedException();
+            var procedure = "spAddBook";
+            var parameters = new
+            {
+                @AuthorId = addBook.AuthorId,
+                @SeriesId = addBook.SeriesId,
+                @Title = addBook.Title,
+                @Description = addBook.Description,
+                @Rating = addBook.Rating,
+                @CoverArt = addBook.CoverArt
+            };
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                conn.Execute(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            return addBook;
         }
 
-        public int DeleteBook(int bookId)
+        public void DeleteBook(int bookId)
         {
-            throw new NotImplementedException();
+            var procedure = "spDeleteBook";
+            var parameters = new { @Id = bookId };
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                conn.Execute(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+
         }
 
         public List<BooksDTO> GetAllBooks()
@@ -71,9 +93,36 @@ namespace BookWorm.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public int UpdateBook(BooksDTO updateBook)
+        public BooksDTO GetLatestBook()
         {
-            throw new NotImplementedException();
+            var procedure = "spGetLatestBook";
+            var book = new BooksDTO();
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                book = conn.QueryFirstOrDefault<BooksDTO>(procedure, commandType: CommandType.StoredProcedure);
+            }
+            return book;
+        }
+
+        public BooksDTO UpdateBook(BooksDTO updateBook)
+        {
+            var procedure = "spUpdateBook";
+            var parameters = new {
+                @Id = updateBook.Id,
+                @AuthorId = updateBook.AuthorId,
+                @SeriesId = updateBook.SeriesId,
+                @Title = updateBook.Title,
+                @Description = updateBook.Description,
+                @Rating = updateBook.Rating,
+                @CoverArt = updateBook.CoverArt
+            };
+
+            using(IDbConnection conn = new SqlConnection(_connString))
+            {
+                conn.Execute(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            return updateBook;
         }
     }
 }
