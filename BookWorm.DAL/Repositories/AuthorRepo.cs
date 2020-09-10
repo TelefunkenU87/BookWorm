@@ -25,7 +25,7 @@ namespace BookWorm.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public int DeleteAuthor(AuthorsDTO deleteAuthor)
+        public int DeleteAuthor(int authorId)
         {
             throw new NotImplementedException();
         }

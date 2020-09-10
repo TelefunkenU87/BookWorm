@@ -27,6 +27,7 @@ namespace BookWorm.MVC
         {
             services.AddControllersWithViews();
             services.AddScoped<IAuthorRepo, AuthorRepo>();
+            services.AddScoped<IBookRepo, BookRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

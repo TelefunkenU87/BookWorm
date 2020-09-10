@@ -8,7 +8,7 @@ namespace BookWorm.DAL.Interfaces
     public interface IAuthorRepo
     {
         int AddAuthor(AuthorsDTO addAuthor);
-        int DeleteAuthor(AuthorsDTO deleteAuthor);
+        int DeleteAuthor(int authorId);
         List<AuthorsDTO> GetAllAuthors();
         AuthorsDTO GetAuthorById(int authorId);
         AuthorsDTO GetAuthorByName(string authorName);
