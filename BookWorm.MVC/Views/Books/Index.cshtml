@@ -1,4 +1,5 @@
-﻿@model List<BooksDTO>
+﻿@*@model List<BooksDTO>*@
+@model BooksViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -18,19 +19,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var b in Model)
+                    @foreach (var b in Model.Books)
                     {
-                        if(b.Id != 0)
-                        { 
-                        <tr>
-                            <td>
-                                <a class="btn" asp-controller="Books" asp-action="Details"
-                                   asp-route-id="@b.Id">@b.Title</a>
-                            </td>
-                            <td>@b.AuthorName</td>
-                            <td>@b.SeriesName</td>
-                            <td>@b.Rating</td>
-                        </tr>
+                        if (b.Id > 0)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="btn" asp-controller="Books" asp-action="Details"
+                                       asp-route-id="@b.Id">@b.Title</a>
+                                </td>
+                                <td>@b.FirstName @b.LastName</td>
+                                <td>@b.SeriesName</td>
+                                <td>@b.Rating</td>
+                            </tr>
                         }
                     }
                 </tbody>
@@ -52,7 +53,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <partial name="BookForm" model=@Model.Last() />
+                        <partial name="BookForm" model=@Model.BookForm />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

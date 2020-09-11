@@ -1,13 +1,14 @@
-﻿@model BooksDTO
+﻿@*@model BooksDTO*@
+@model BookFormModel
 @{
 }
 
 <div class="card mb-3">
     <div class="row no-gutters">
         <div class="col-md-4">
-            @if(Model.CoverArt != null)
+            @if(Model.BookForm.CoverArt != null)
             {
-                <img src="data:image;base64,@Convert.ToBase64String(Model.CoverArt)" class="card-img" />
+                <img src="data:image;base64,@Convert.ToBase64String(Model.BookForm.CoverArt)" class="card-img" />
             }
             else
             {
@@ -16,22 +17,22 @@
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">@Model.Title</h5>
-                <p>@Model.AuthorName</p>
-                <p class="card-text">@Model.Description</p>
-                <p>@Model.SeriesName</p>
-                <p>@Model.Rating</p>
+                <h5 class="card-title">@Model.BookForm.Title</h5>
+                <p>@Model.BookForm.FirstName @Model.BookForm.LastName</p>
+                <p class="card-text">@Model.BookForm.Description</p>
+                <p>@Model.BookForm.SeriesName</p>
+                <p>@Model.BookForm.Rating</p>
             </div>
             @*<div class="card-body">
                 <a href="#" class="card-link">Edit</a>
                 <a href="#" class="card-link">Delete</a>
             </div>*@
         <div class="card-footer">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id-@Model.Id">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id-@Model.BookForm.Id">
                 @*<i class="fas fa-edit"></i>*@
                 Edit
             </button>
-            <div class="modal fade" id="id-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="id-@Model.BookForm.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -51,12 +52,12 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#del-@Model.Id">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#del-@Model.BookForm.Id">
                 @*<i class="fa fa-trash-alt"></i>*@
                 Delete
             </button>
 
-            <div class="modal fade" id="del-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="del-@Model.BookForm.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -71,7 +72,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <a class="btn btn-danger" asp-controller="Books" asp-action="DeleteBook"
-                               asp-route-id="@Model.Id">Delete</a>
+                               asp-route-id="@Model.BookForm.Id">Delete</a>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookWorm.DAL.Interfaces;
 using BookWorm.DTO;
+using BookWorm.MVC.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookWorm.MVC.Controllers
 {
@@ -23,18 +25,41 @@ namespace BookWorm.MVC.Controllers
         public IActionResult Index()
         {
             var books = _bookRepo.GetAllBooks();
-            var newBook = new BooksDTO();
-            newBook.Id = 0;
-            books.Add(newBook);
+            var repoAuthors = _authorRepo.GetAllAuthors();
+            var returnAuthors = new List<SelectListItem>();
+            returnAuthors.Add(new SelectListItem("Add New Author", "0"));
+            foreach (var item in repoAuthors)
+            {
+                returnAuthors.Add(new SelectListItem($"{item.FirstName} {item.LastName}", $"{item.Id}"));
+            }
 
-            return View(books);
+            return View(new BooksViewModel()
+            {
+                Books = books,
+                BookForm = new BookFormModel()
+                {
+                    BookForm = new BooksDTO() { Id = 0 },
+                    Authors = returnAuthors
+                }
+            });
         }
 
         public IActionResult Details(int id)
         {
             var book = _bookRepo.GetBookById(id);
+            var repoAuthors = _authorRepo.GetAllAuthors();
+            var returnAuthors = new List<SelectListItem>();
+            returnAuthors.Add(new SelectListItem("Add New Author", "0"));
+            foreach (var item in repoAuthors)
+            {
+                returnAuthors.Add(new SelectListItem($"{item.FirstName} {item.LastName}", $"{item.Id}"));
+            }
 
-            return View(book);
+            return View(new BookFormModel()
+            {
+                BookForm = book,
+                Authors = returnAuthors
+            });
         }
 
         public IActionResult DeleteBook(int id)
@@ -51,16 +76,16 @@ namespace BookWorm.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditBook(BooksDTO updatedBook)
+        public IActionResult EditBook(BookFormModel updatedBook)
         {
-            if(ModelState.IsValid && updatedBook.Id > 0)
+            if(ModelState.IsValid && updatedBook.BookForm.Id > 0)
             {
-                _bookRepo.UpdateBook(updatedBook);
-                return RedirectToAction("Details", new { id = updatedBook.Id });
+                _bookRepo.UpdateBook(updatedBook.BookForm);
+                return RedirectToAction("Details", new { id = updatedBook.BookForm.Id });
             }
-            else if(ModelState.IsValid && updatedBook.Id < 1)
+            else if(ModelState.IsValid && updatedBook.BookForm.Id < 1)
             {
-                _bookRepo.AddBook(updatedBook);
+                _bookRepo.AddBook(updatedBook.BookForm);
                 var newBook = _bookRepo.GetLatestBook();
                 return RedirectToAction("Details", new { id = newBook.Id });
             }

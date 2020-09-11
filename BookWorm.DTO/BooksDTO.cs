@@ -8,7 +8,8 @@ namespace BookWorm.DTO
     {
         public int Id { get; set; }
         public int? AuthorId { get; set; }
-        public string AuthorName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int? SeriesId { get; set; }
         public string SeriesName { get; set; }
         public string Title { get; set; }

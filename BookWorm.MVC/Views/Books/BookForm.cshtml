@@ -1,28 +1,32 @@
-﻿@model BooksDTO
+﻿@*@model BooksDTO*@
+@model BookFormModel 
 
 <form asp-controller="Books" asp-action="EditBook" method="post" role="form">
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <input type="hidden" asp-for="@Model.Id" />
-    <input type="hidden" asp-for="@Model.AuthorId" />
-    <input type="hidden" asp-for="@Model.AuthorName" />
-    <input type="hidden" asp-for="@Model.SeriesId" />
-    <input type="hidden" asp-for="@Model.SeriesName" />
+    <input type="hidden" asp-for="@Model.BookForm.Id" />
+    @*<input type="hidden" asp-for="@Model.BookForm.AuthorId" />*@
+    @*<input type="hidden" asp-for="@Model.BookForm.AuthorName" />*@
+    <input type="hidden" asp-for="@Model.BookForm.FirstName" />
+    <input type="hidden" asp-for="@Model.BookForm.LastName" />
+    <input type="hidden" asp-for="@Model.BookForm.SeriesId" />
+    <input type="hidden" asp-for="@Model.BookForm.SeriesName" />
     <div class="form-group">
-        <label asp-for="@Model.Title"></label>
-        <input asp-for="@Model.Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+        <label asp-for="@Model.BookForm.Title"></label>
+        <input asp-for="@Model.BookForm.Title" class="form-control" />
+        <span asp-validation-for="BookForm.Title" class="text-danger"></span>
+    </div>
+    <select asp-for="@Model.BookForm.AuthorId" asp-items="@Model.Authors"></select>
+    <div class="form-group">
+        <label asp-for="@Model.BookForm.Description"></label>
+        <input asp-for="@Model.BookForm.Description" class="form-control" />
+        <span asp-validation-for="BookForm.Description" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Description"></label>
-        <input asp-for="@Model.Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Rating"></label>
-        <input asp-for="@Model.Rating" class="form-control" />
-        <span asp-validation-for="Rating" class="text-danger"></span>
+        <label asp-for="@Model.BookForm.Rating"></label>
+        <input asp-for="@Model.BookForm.Rating" class="form-control" />
+        <span asp-validation-for="BookForm.Rating" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
