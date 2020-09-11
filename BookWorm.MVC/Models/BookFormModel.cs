@@ -11,5 +11,6 @@ namespace BookWorm.MVC.Models
     {
         public BooksDTO BookForm { get; set; }
         public List<SelectListItem> Authors { get; set; }
+        public List<SelectListItem> Series { get; set; }
     }
 }

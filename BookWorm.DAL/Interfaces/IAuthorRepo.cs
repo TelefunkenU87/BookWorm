@@ -7,11 +7,12 @@ namespace BookWorm.DAL.Interfaces
 {
     public interface IAuthorRepo
     {
-        int AddAuthor(AuthorsDTO addAuthor);
+        AuthorsDTO AddAuthor(AuthorsDTO addAuthor);
         int DeleteAuthor(int authorId);
         List<AuthorsDTO> GetAllAuthors();
         AuthorsDTO GetAuthorById(int authorId);
         AuthorsDTO GetAuthorByName(string authorName);
+        AuthorsDTO GetLatestAuthor();
         int UpdateAuthor(AuthorsDTO updateAuthor);
     }
 }
