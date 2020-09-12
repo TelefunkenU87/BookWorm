@@ -1,0 +1,16 @@
+﻿@model SeriesDTO
+
+<form asp-controller="Series" asp-action="EditSeries" method="post" role="form">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" asp-for="@Model.Id" />
+    <div class="form-group">
+        <label asp-for="@Model.SeriesName"></label>
+        <input asp-for="@Model.SeriesName" class="form-control" id="AuthorsFirstName" />
+        <span asp-validation-for="SeriesName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+</form>

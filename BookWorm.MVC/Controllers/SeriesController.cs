@@ -33,5 +33,34 @@ namespace BookWorm.MVC.Controllers
                 SeriesForm = new SeriesDTO()
             });
         }
+
+        public IActionResult Details(int id)
+        {
+            return View(new SeriesViewModel()
+            {
+                SeriesForm = _seriesRepo.GetSeriesById(id),
+                SeriesBooks = _bookRepo.GetBooksBySeries(id)
+            });
+        }
+
+        [HttpPost]
+        public IActionResult EditSeries(SeriesDTO updatedSeries)
+        {
+            if (ModelState.IsValid && updatedSeries.Id > 0)
+            {
+                _seriesRepo.UpdateSeries(updatedSeries);
+                return RedirectToAction("Details", new { id = updatedSeries.Id });
+            }
+            else if (ModelState.IsValid && updatedSeries.Id == 0)
+            {
+                _seriesRepo.AddSeries(updatedSeries);
+                var newSeries = _seriesRepo.GetLatestSeries();
+                return RedirectToAction("Details", new { id = newSeries });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

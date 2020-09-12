@@ -98,7 +98,15 @@ namespace BookWorm.DAL.Repositories
 
         public List<BooksDTO> GetBooksBySeries(int seriesId)
         {
-            throw new NotImplementedException();
+            var procedure = "spGetBooksBySeries";
+            var parameters = new { @SeriesId = seriesId };
+            var series = new List<BooksDTO>();
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                series = conn.Query<BooksDTO>(procedure, parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return series;
         }
 
         public BooksDTO GetLatestBook()

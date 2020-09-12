@@ -13,6 +13,6 @@ namespace BookWorm.DAL.Interfaces
         SeriesDTO GetSeriesById(int seriesId);
         SeriesDTO GetSeriesByName(string seriesName);
         SeriesDTO GetLatestSeries();
-        int UpdateSeries(SeriesDTO updateSeries);
+        SeriesDTO UpdateSeries(SeriesDTO updateSeries);
     }
 }

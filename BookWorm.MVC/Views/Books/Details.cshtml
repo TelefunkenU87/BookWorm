@@ -1,5 +1,4 @@
-﻿@*@model BooksDTO*@
-@model BookFormModel
+﻿@model BookFormModel
 @{
 }
 
@@ -21,7 +20,12 @@
                 <p>@Model.BookForm.FirstName @Model.BookForm.LastName</p>
                 <p class="card-text">@Model.BookForm.Description</p>
                 <p>@Model.BookForm.SeriesName</p>
-                <p>@Model.BookForm.Rating</p>
+                <p>
+                    @for (var i = 0; i < Model.BookForm.Rating; i++)
+                    {
+                        <b>&#11088;</b>
+                    }
+                </p>
             </div>
             @*<div class="card-body">
                 <a href="#" class="card-link">Edit</a>

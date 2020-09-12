@@ -1,6 +1,6 @@
 ﻿@model BooksViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Books";
 }
 
 <div class="container">
@@ -27,9 +27,22 @@
                                     <a class="btn" asp-controller="Books" asp-action="Details"
                                        asp-route-id="@b.Id">@b.Title</a>
                                 </td>
-                                <td>@b.FirstName @b.LastName</td>
-                                <td>@b.SeriesName</td>
-                                <td>@b.Rating</td>
+                                <td>
+                                    <a class="btn" asp-controller="Authors" asp-action="Details"
+                                       asp-route-id="@b.AuthorId">@b.FirstName @b.LastName</a>
+                                </td>
+                                <td>
+                                    <a class="btn" asp-controller="Series" asp-action="Details"
+                                       asp-route-id="@b.SeriesId">@b.SeriesName</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        @for (var i = 0; i < b.Rating; i++)
+                                        {
+                                            <b>&#11088;</b>
+                                        }
+                                    </p>
+                                </td>
                             </tr>
                         }
                     }

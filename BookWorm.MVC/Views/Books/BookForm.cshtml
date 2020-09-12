@@ -1,5 +1,4 @@
-﻿@*@model BooksDTO*@
-@model BookFormModel 
+﻿@model BookFormModel 
 
 <form asp-controller="Books" asp-action="EditBook" method="post" role="form" enctype="multipart/form-data">
 
@@ -12,6 +11,7 @@
     @*<input type="hidden" asp-for="@Model.BookForm.LastName" />*@
     @*<input type="hidden" asp-for="@Model.BookForm.SeriesId" />*@
     @*<input type="hidden" asp-for="@Model.BookForm.SeriesName" />*@
+    <input type="hidden" asp-for="@Model.BookForm.CoverArt" />
     <div class="form-group">
         <label asp-for="@Model.UploadedCoverArt" class="control-label"></label>
         <input asp-for="@Model.UploadedCoverArt" accept="image/*" />

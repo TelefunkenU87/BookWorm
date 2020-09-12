@@ -1,14 +1,14 @@
-﻿@model AuthorViewModel
+﻿@model SeriesViewModel
 @{
 }
 
 <div>
-    <h1>@Model.AuthorForm.FirstName @Model.AuthorForm.LastName</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id-@Model.AuthorForm.Id">
+    <h1>@Model.SeriesForm.SeriesName</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id-@Model.SeriesForm.Id">
         @*<i class="fas fa-edit"></i>*@
         Edit
     </button>
-    <div class="modal fade" id="id-@Model.AuthorForm.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="id-@Model.SeriesForm.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -18,7 +18,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <partial name="AuthorForm" model=@Model.AuthorForm />
+                    <partial name="SeriesForm" model=@Model.SeriesForm />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -38,24 +38,24 @@
                 <thead class="thead-light">
                     <tr>
                         <th data-sortable="true">Title</th>
-                        <th data-sortable="true">Series</th>
+                        <th data-sortable="true">Author</th>
                         <th data-sortable="true">Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var a in Model.AuthorsBooks)
+                    @foreach (var s in Model.SeriesBooks)
                     {
-                        if (a.Id > 0)
+                        if (s.Id > 0)
                         {
                             <tr>
                                 <td>
                                     <a class="btn" asp-controller="Books" asp-action="Details"
-                                       asp-route-id="@a.Id">@a.Title</a>
+                                       asp-route-id="@s.Id">@s.Title</a>
                                 </td>
-                                <td>@a.SeriesName</td>
+                                <td>@s.FirstName @s.LastName</td>
                                 <td>
                                     <p>
-                                        @for (var i = 0; i < a.Rating; i++)
+                                        @for (var i = 0; i < s.Rating; i++)
                                         {
                                             <b>&#11088;</b>
                                         }

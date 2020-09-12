@@ -66,7 +66,15 @@ namespace BookWorm.DAL.Repositories
 
         public SeriesDTO GetSeriesById(int seriesId)
         {
-            throw new NotImplementedException();
+            var procedure = "spGetSeriesById";
+            var parameters = new { @SeriesId = seriesId };
+            var series = new SeriesDTO();
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                series = conn.QueryFirstOrDefault<SeriesDTO>(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            return series;
         }
 
         public SeriesDTO GetSeriesByName(string seriesName)
@@ -74,9 +82,20 @@ namespace BookWorm.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public int UpdateSeries(SeriesDTO updateSeries)
+        public SeriesDTO UpdateSeries(SeriesDTO updateSeries)
         {
-            throw new NotImplementedException();
+            var procedure = "spUpdateSeries";
+            var parameters = new
+            {
+                @Id = updateSeries.Id,
+                @SeriesName = updateSeries.SeriesName
+            };
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                conn.Execute(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            return updateSeries;
         }
     }
 }
