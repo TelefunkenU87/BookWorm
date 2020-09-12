@@ -7,7 +7,7 @@
     <input type="hidden" asp-for="@Model.Id" />
     <div class="form-group">
         <label asp-for="@Model.SeriesName"></label>
-        <input asp-for="@Model.SeriesName" class="form-control" id="AuthorsFirstName" />
+        <input asp-for="@Model.SeriesName" maxlength="100" class="form-control" id="AuthorsFirstName" />
         <span asp-validation-for="SeriesName" class="text-danger"></span>
     </div>
 

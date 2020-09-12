@@ -1,11 +1,12 @@
 ﻿@model BookFormModel
 @{
+    ViewData["Title"] = $"{Model.BookForm.Title}";
 }
 
 <div class="card mb-3">
     <div class="row no-gutters">
         <div class="col-md-4">
-            @if(Model.BookForm.CoverArt != null)
+            @if (Model.BookForm.CoverArt != null)
             {
                 <img src="data:image;base64,@Convert.ToBase64String(Model.BookForm.CoverArt)" class="card-img" />
             }
