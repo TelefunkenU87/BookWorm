@@ -7,6 +7,7 @@ using BookWorm.DAL.Interfaces;
 using BookWorm.DTO;
 using BookWorm.MVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
 
 namespace BookWorm.MVC.Controllers
 {
@@ -65,11 +66,15 @@ namespace BookWorm.MVC.Controllers
         [HttpPost]
         public IActionResult EditBook(BookFormModel updatedBook)
         {
-            if(updatedBook.BookForm.AuthorId == 0)
+            if(updatedBook.UploadedCoverArt != null)
+            {
+                UploadCoverArt(updatedBook);
+            }
+            if (updatedBook.BookForm.AuthorId == 0)
             {
                 GenerateNewAuthor(updatedBook);
             }
-            if (updatedBook.BookForm.SeriesId == 0)
+            if (updatedBook.BookForm.SeriesId == 0 && updatedBook.BookForm.SeriesName != null)
             {
                 GenerateNewSeries(updatedBook);
             }
@@ -116,6 +121,16 @@ namespace BookWorm.MVC.Controllers
             }
 
             return returnSeries;
+        }
+
+        private static void UploadCoverArt(BookFormModel updatedBook)
+        {
+            using (var ms = new MemoryStream())
+            {
+                updatedBook.UploadedCoverArt.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                updatedBook.BookForm.CoverArt = fileBytes;
+            }
         }
 
         private void GenerateNewAuthor(BookFormModel updatedBook)

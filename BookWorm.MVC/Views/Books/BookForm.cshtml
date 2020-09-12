@@ -1,7 +1,7 @@
 ﻿@*@model BooksDTO*@
 @model BookFormModel 
 
-<form asp-controller="Books" asp-action="EditBook" method="post" role="form">
+<form asp-controller="Books" asp-action="EditBook" method="post" role="form" enctype="multipart/form-data">
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -12,6 +12,11 @@
     @*<input type="hidden" asp-for="@Model.BookForm.LastName" />*@
     @*<input type="hidden" asp-for="@Model.BookForm.SeriesId" />*@
     @*<input type="hidden" asp-for="@Model.BookForm.SeriesName" />*@
+    <div class="form-group">
+        <label asp-for="@Model.UploadedCoverArt" class="control-label"></label>
+        <input asp-for="@Model.UploadedCoverArt" accept="image/*" />
+        <span asp-validation-for="@Model.UploadedCoverArt" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="@Model.BookForm.Title"></label>
         <input asp-for="@Model.BookForm.Title" class="form-control" />
