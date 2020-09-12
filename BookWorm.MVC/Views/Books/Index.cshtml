@@ -49,15 +49,15 @@
                         {
                             <tr>
                                 <td>
-                                    <a class="btn" asp-controller="Books" asp-action="Details"
+                                    <a class="btn btn-link" asp-controller="Books" asp-action="Details"
                                        asp-route-id="@b.Id">@b.Title</a>
                                 </td>
                                 <td>
-                                    <a class="btn" asp-controller="Authors" asp-action="Details"
+                                    <a class="btn btn-link" asp-controller="Authors" asp-action="Details"
                                        asp-route-id="@b.AuthorId">@b.FirstName @b.LastName</a>
                                 </td>
                                 <td>
-                                    <a class="btn" asp-controller="Series" asp-action="Details"
+                                    <a class="btn btn-link" asp-controller="Series" asp-action="Details"
                                        asp-route-id="@b.SeriesId">@b.SeriesName</a>
                                 </td>
                                 <td>

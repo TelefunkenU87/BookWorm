@@ -17,9 +17,15 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">@Model.BookForm.Title</h5>
-                <p>@Model.BookForm.FirstName @Model.BookForm.LastName</p>
+                <p>
+                    <a class="btn btn-outline-primary" asp-controller="Authors" asp-action="Details"
+                       asp-route-id="@Model.BookForm.AuthorId">@Model.BookForm.FirstName @Model.BookForm.LastName</a>
+                </p>
                 <p class="card-text">@Model.BookForm.Description</p>
-                <p>@Model.BookForm.SeriesName</p>
+                <p>
+                    <a class="btn btn-outline-primary" asp-controller="Series" asp-action="Details"
+                       asp-route-id="@Model.BookForm.SeriesId">@Model.BookForm.SeriesName</a>
+                </p>
                 <p>
                     @for (var i = 0; i < Model.BookForm.Rating; i++)
                     {
@@ -27,10 +33,6 @@
                     }
                 </p>
             </div>
-            @*<div class="card-body">
-                <a href="#" class="card-link">Edit</a>
-                <a href="#" class="card-link">Delete</a>
-            </div>*@
         <div class="card-footer">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id-@Model.BookForm.Id">
                 @*<i class="fas fa-edit"></i>*@
