@@ -78,9 +78,17 @@ namespace BookWorm.DAL.Repositories
             return book;
         }
 
-        public BooksDTO GetBookBytitle(string title)
+        public List<BooksDTO> GetBookByAuthor(int authorId)
         {
-            throw new NotImplementedException();
+            var procedure = "spGetBooksByAuthor";
+            var parameters = new { @AuthorId = authorId };
+            var books = new List<BooksDTO>();
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                books = conn.Query<BooksDTO>(procedure, parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return books;
         }
 
         public List<BooksDTO> GetBooksByRating(int rating)

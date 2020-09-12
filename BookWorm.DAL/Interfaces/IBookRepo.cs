@@ -13,7 +13,7 @@ namespace BookWorm.DAL.Interfaces
         BooksDTO GetBookById(int bookId);
         List<BooksDTO> GetBooksByRating(int rating);
         List<BooksDTO> GetBooksBySeries(int seriesId);
-        BooksDTO GetBookBytitle(string title);
+        List<BooksDTO> GetBookByAuthor(int authorId);
         BooksDTO GetLatestBook();
         BooksDTO UpdateBook(BooksDTO updateBook);
     }

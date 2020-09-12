@@ -1,6 +1,5 @@
-﻿@model BooksViewModel
+﻿@model AuthorViewModel
 @{
-    ViewData["Title"] = "Home Page";
 }
 
 <div class="container">
@@ -11,25 +10,19 @@
                    data-pagination="true" data-pagination-v-align="both">
                 <thead class="thead-light">
                     <tr>
-                        <th data-sortable="true">Title</th>
-                        <th data-sortable="true">Author</th>
-                        <th data-sortable="true">Series</th>
-                        <th data-sortable="true">Rating</th>
+                        <th data-sortable="true">Author Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var b in Model.Books)
+                    @foreach (var a in Model.Authors)
                     {
-                        if (b.Id > 0)
+                        if (a.Id > 0)
                         {
                             <tr>
                                 <td>
-                                    <a class="btn" asp-controller="Books" asp-action="Details"
-                                       asp-route-id="@b.Id">@b.Title</a>
+                                    <a class="btn" asp-controller="Authors" asp-action="Details"
+                                       asp-route-id="@a.Id">@a.FirstName @a.LastName</a>
                                 </td>
-                                <td>@b.FirstName @b.LastName</td>
-                                <td>@b.SeriesName</td>
-                                <td>@b.Rating</td>
                             </tr>
                         }
                     }
@@ -37,29 +30,29 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <!--<div class="row">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id-New">
-            New Book
+            New Author
         </button>
 
         <div class="modal fade" id="id-New" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Book</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New Author</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <partial name="BookForm" model=@Model.BookForm />
+                        <partial name="AuthorForm" model=@Model.AuthorForm />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
                         @*<button type="button" class="btn btn-primary">Save changes</button>*@
-                    </div>
+                    <!--</div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>

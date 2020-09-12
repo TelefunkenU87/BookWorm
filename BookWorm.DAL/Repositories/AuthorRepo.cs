@@ -55,7 +55,15 @@ namespace BookWorm.DAL.Repositories
 
         public AuthorsDTO GetAuthorById(int authorId)
         {
-            throw new NotImplementedException();
+            var procedure = "spGetAuthorById";
+            var parameters = new { @AuthorId = authorId };
+            var author = new AuthorsDTO();
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                author = conn.QueryFirstOrDefault<AuthorsDTO>(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            return author;
         }
 
         public AuthorsDTO GetAuthorByName(string authorName)
@@ -75,9 +83,21 @@ namespace BookWorm.DAL.Repositories
             return author;
         }
 
-        public int UpdateAuthor(AuthorsDTO updateAuthor)
+        public AuthorsDTO UpdateAuthor(AuthorsDTO updateAuthor)
         {
-            throw new NotImplementedException();
+            var procedure = "spUpdateAuthor";
+            var parameters = new
+            {
+                @Id = updateAuthor.Id,
+                @FirstName = updateAuthor.FirstName,
+                @LastName = updateAuthor.LastName
+            };
+
+            using (IDbConnection conn = new SqlConnection(_connString))
+            {
+                conn.Execute(procedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            return updateAuthor;
         }
     }
 }

@@ -13,6 +13,6 @@ namespace BookWorm.DAL.Interfaces
         AuthorsDTO GetAuthorById(int authorId);
         AuthorsDTO GetAuthorByName(string authorName);
         AuthorsDTO GetLatestAuthor();
-        int UpdateAuthor(AuthorsDTO updateAuthor);
+        AuthorsDTO UpdateAuthor(AuthorsDTO updateAuthor);
     }
 }
