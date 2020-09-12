@@ -5,12 +5,6 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <input type="hidden" asp-for="@Model.BookForm.Id" />
-    @*<input type="hidden" asp-for="@Model.BookForm.AuthorId" />*@
-    @*<input type="hidden" asp-for="@Model.BookForm.AuthorName" />*@
-    @*<input type="hidden" asp-for="@Model.BookForm.FirstName" />*@
-    @*<input type="hidden" asp-for="@Model.BookForm.LastName" />*@
-    @*<input type="hidden" asp-for="@Model.BookForm.SeriesId" />*@
-    @*<input type="hidden" asp-for="@Model.BookForm.SeriesName" />*@
     <input type="hidden" asp-for="@Model.BookForm.CoverArt" />
     <div class="form-group">
         <label asp-for="@Model.UploadedCoverArt" class="control-label"></label>
@@ -50,7 +44,7 @@
     </div>
     <div class="form-group">
         <label asp-for="@Model.BookForm.Rating"></label>
-        <input asp-for="@Model.BookForm.Rating" class="form-control" />
+        <input asp-for="@Model.BookForm.Rating" min="1" max="5" class="form-control" />
         <span asp-validation-for="BookForm.Rating" class="text-danger"></span>
     </div>
 

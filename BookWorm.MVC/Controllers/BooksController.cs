@@ -8,6 +8,7 @@ using BookWorm.DTO;
 using BookWorm.MVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace BookWorm.MVC.Controllers
 {
@@ -28,9 +29,25 @@ namespace BookWorm.MVC.Controllers
 
         public IActionResult Index()
         {
+            var books = new List<BooksDTO>();
+            try
+            {
+                var result = _bookRepo.GetAllBooks();
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                books = result;
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
             return View(new BooksViewModel()
             {
-                Books = _bookRepo.GetAllBooks(),
+                Books = books,
                 BookForm = new BookFormModel()
                 {
                     BookForm = new BooksDTO() { Id = 0 },
@@ -42,9 +59,26 @@ namespace BookWorm.MVC.Controllers
 
         public IActionResult Details(int id)
         {
+            var bookForm = new BooksDTO();
+            try
+            {
+                var result = _bookRepo.GetBookById(id);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                bookForm = result;
+            }
+            catch(Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+
             return View(new BookFormModel()
             {
-                BookForm = _bookRepo.GetBookById(id),
+                BookForm = bookForm,
                 Authors = PopulateAuthorsDropdown(),
                 Series = PopulateSeriesDropdown()
             });

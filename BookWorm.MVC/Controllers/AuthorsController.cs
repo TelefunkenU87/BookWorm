@@ -8,6 +8,7 @@ using BookWorm.DTO;
 using BookWorm.MVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace BookWorm.MVC.Controllers
 {
@@ -28,18 +29,51 @@ namespace BookWorm.MVC.Controllers
 
         public IActionResult Index()
         {
+            var authors = new List<AuthorsDTO>();
+            try
+            {
+                var result = _authorRepo.GetAllAuthors();
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                authors = result;
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
             return View(new AuthorViewModel()
             {
-                Authors = _authorRepo.GetAllAuthors(),
+                Authors = authors,
                 AuthorForm = new AuthorsDTO()
             });
         }
 
         public IActionResult Details(int id)
         {
+            var authorForm = new AuthorsDTO();
+            try
+            {
+                var result = _authorRepo.GetAuthorById(id);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                authorForm = result;
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+
             return View(new AuthorViewModel()
             {
-                AuthorForm = _authorRepo.GetAuthorById(id),
+                AuthorForm = authorForm,
                 AuthorsBooks = _bookRepo.GetBookByAuthor(id)
             });
         }

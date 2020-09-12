@@ -13,20 +13,15 @@ namespace BookWorm.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IAuthorRepo _authorRepo;
 
-        public HomeController(ILogger<HomeController> logger,
-                                IAuthorRepo authorRepo)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _authorRepo = authorRepo;
         }
 
         public IActionResult Index()
         {
-            var authors = _authorRepo.GetAllAuthors();
-
-            return View(authors);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
