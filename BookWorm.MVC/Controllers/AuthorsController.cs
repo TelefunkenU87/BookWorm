@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookWorm.DAL.Interfaces;
 using BookWorm.DTO;
 using BookWorm.MVC.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.IO;
 using Microsoft.AspNetCore.Http;
 
 namespace BookWorm.MVC.Controllers

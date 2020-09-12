@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using BookWorm.DTO;
 using BookWorm.DAL.Interfaces;
 
@@ -89,11 +88,6 @@ namespace BookWorm.DAL.Repositories
                 books = conn.Query<BooksDTO>(procedure, parameters, commandType: CommandType.StoredProcedure).ToList();
             }
             return books;
-        }
-
-        public List<BooksDTO> GetBooksByRating(int rating)
-        {
-            throw new NotImplementedException();
         }
 
         public List<BooksDTO> GetBooksBySeries(int seriesId)

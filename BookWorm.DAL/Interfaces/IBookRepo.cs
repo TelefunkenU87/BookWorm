@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using BookWorm.DTO;
 
 namespace BookWorm.DAL.Interfaces
@@ -11,7 +9,6 @@ namespace BookWorm.DAL.Interfaces
         void DeleteBook(int bookId);
         List<BooksDTO> GetAllBooks();
         BooksDTO GetBookById(int bookId);
-        List<BooksDTO> GetBooksByRating(int rating);
         List<BooksDTO> GetBooksBySeries(int seriesId);
         List<BooksDTO> GetBookByAuthor(int authorId);
         BooksDTO GetLatestBook();

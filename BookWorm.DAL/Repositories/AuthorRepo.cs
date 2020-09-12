@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using BookWorm.DTO;
 using BookWorm.DAL.Interfaces;
 
@@ -36,11 +35,6 @@ namespace BookWorm.DAL.Repositories
             return addAuthor;
         }
 
-        public int DeleteAuthor(int authorId)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<AuthorsDTO> GetAllAuthors()
         {
             var procedure = "spGetAllAuthors";
@@ -64,11 +58,6 @@ namespace BookWorm.DAL.Repositories
                 author = conn.QueryFirstOrDefault<AuthorsDTO>(procedure, parameters, commandType: CommandType.StoredProcedure);
             }
             return author;
-        }
-
-        public AuthorsDTO GetAuthorByName(string authorName)
-        {
-            throw new NotImplementedException();
         }
 
         public AuthorsDTO GetLatestAuthor()

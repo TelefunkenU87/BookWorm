@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BookWorm.DTO
+﻿namespace BookWorm.DTO
 {
     public class SeriesDTO
     {

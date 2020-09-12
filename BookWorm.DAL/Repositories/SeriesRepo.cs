@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using BookWorm.DTO;
 using BookWorm.DAL.Interfaces;
 
@@ -33,11 +32,6 @@ namespace BookWorm.DAL.Repositories
                 conn.Execute(procedure, parameters, commandType: CommandType.StoredProcedure);
             }
             return addSeries;
-        }
-
-        public int DeleteSeries(int seriesId)
-        {
-            throw new NotImplementedException();
         }
 
         public List<SeriesDTO> GetAllSeries()
@@ -75,11 +69,6 @@ namespace BookWorm.DAL.Repositories
                 series = conn.QueryFirstOrDefault<SeriesDTO>(procedure, parameters, commandType: CommandType.StoredProcedure);
             }
             return series;
-        }
-
-        public SeriesDTO GetSeriesByName(string seriesName)
-        {
-            throw new NotImplementedException();
         }
 
         public SeriesDTO UpdateSeries(SeriesDTO updateSeries)

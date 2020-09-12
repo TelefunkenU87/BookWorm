@@ -1,5 +1,3 @@
-using System;
-
 namespace BookWorm.MVC.Models
 {
     public class ErrorViewModel
