@@ -1,5 +1,6 @@
 # BookWorm
-A website for my book collection
+Built in 48 hours for a code challenge.
+A website for my book collection.
 
 # ConnectionString
 Inside of the BookWorm.MVC project.
